@@ -10,7 +10,7 @@ App developed by Jorge Cortés
 
 ### Screenshots
 
-**[Laundry App Flutter UI Kit](https://github.com/OLayemii/flutter-ui-kits/tree/main/laundry_app_ui)**
+**[Laundry App]**
 
 ![Laundry App](https://res.cloudinary.com/olayemii/image/upload/v1611749849/assets/laundry-main_znvlqd.png)
 
