@@ -5,7 +5,7 @@ import 'package:laundry_app/utils/helper.dart';
 import 'package:laundry_app/widgets/app_button.dart';
 import 'package:laundry_app/widgets/input_widget.dart';
 
-class Login extends StatelessWidget {
+class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,7 @@ class Login extends StatelessWidget {
                               height: 20.0,
                             ),
                             Text(
-                              "Login to your account",
+                              "Register your account",
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
@@ -88,8 +88,31 @@ class Login extends StatelessWidget {
                             children: [
                               // Lets make a generic input widget
                               InputWidget(
+                                topLabel: "Name",
+                                hintText: "Enter your name",
+                              ),
+                              SizedBox(
+                                height: 25.0,
+                              ),
+                              InputWidget(
+                                topLabel: "Lastname",
+                                hintText: "Enter your last name",
+                              ),
+                              SizedBox(
+                                height: 25.0,
+                              ),
+                              InputWidget(
+                                topLabel: "Phone number",
+                                hintText: "Enter your phone number",
+                                keyboardType: "phone",
+                              ),
+                              SizedBox(
+                                height: 25.0,
+                              ),
+                              InputWidget(
                                 topLabel: "Email",
                                 hintText: "Enter your email address",
+                                keyboardType: "email",
                               ),
                               SizedBox(
                                 height: 25.0,
@@ -102,23 +125,17 @@ class Login extends StatelessWidget {
                               SizedBox(
                                 height: 15.0,
                               ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Text(
-                                  "Forgot Password?",
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                    color: Constants.primaryColor,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                              InputWidget(
+                                topLabel: "Confirm password",
+                                obscureText: true,
+                                hintText: "Enter your password again",
                               ),
                               SizedBox(
                                 height: 20.0,
                               ),
                               AppButton(
                                 type: ButtonType.PRIMARY,
-                                text: "Sign In",
+                                text: "Sign up",
                                 onPressed: () {
                                   nextScreen(context, "/dashboard");
                                 },

@@ -15,35 +15,27 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+        color: getButtonColor(type),
+        borderRadius: BorderRadius.circular(8.0),
+        shadowColor: Color.fromRGBO(169, 176, 185, 0.42),
+        elevation: 2.0,
         child: InkWell(
-      onTap: this.onPressed,
-      child: Container(
-        width: double.infinity,
-        height: ScreenUtil().setHeight(48.0),
-        decoration: BoxDecoration(
-          color: getButtonColor(type),
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromRGBO(169, 176, 185, 0.42),
-              spreadRadius: 0,
-              blurRadius: 8.0,
-              offset: Offset(0, 2),
-            )
-          ],
-        ),
-        child: Center(
-          child: Text(
-            this.text,
-            style: GoogleFonts.roboto(
-              color: getTextColor(type),
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
+          child: Container(
+            width: double.infinity,
+            height: ScreenUtil().setHeight(48.0),
+            child: Center(
+              child: Text(
+                this.text,
+                style: GoogleFonts.roboto(
+                  color: getTextColor(type),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    ));
+          onTap: this.onPressed,
+        ));
   }
 }
 

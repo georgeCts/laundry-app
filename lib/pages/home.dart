@@ -73,7 +73,7 @@ class Home extends StatelessWidget {
                     ),
                     // Let's create a generic button widget
                     AppButton(
-                      text: "Log In",
+                      text: "Sign in",
                       type: ButtonType.PLAIN,
                       onPressed: () {
                         nextScreen(context, "/login");
@@ -83,15 +83,18 @@ class Home extends StatelessWidget {
                       height: 15.0,
                     ),
                     AppButton(
-                      text: "Login as Guest",
+                      text: "Guest",
                       type: ButtonType.PLAIN,
                     ),
                     SizedBox(
                       height: 15.0,
                     ),
                     AppButton(
-                      text: "Create an Account",
+                      text: "Sign up",
                       type: ButtonType.PRIMARY,
+                      onPressed: () {
+                        nextScreen(context, "/register");
+                      },
                     )
                   ],
                 ),

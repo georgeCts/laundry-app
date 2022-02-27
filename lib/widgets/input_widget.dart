@@ -7,6 +7,7 @@ class InputWidget extends StatelessWidget {
   final IconData prefixIcon;
   final double height;
   final String topLabel;
+  final String keyboardType;
   final bool obscureText;
 
   InputWidget({
@@ -14,6 +15,7 @@ class InputWidget extends StatelessWidget {
     this.prefixIcon,
     this.height = 48.0,
     this.topLabel = "",
+    this.keyboardType = "text",
     this.obscureText = false,
   });
   @override
@@ -30,6 +32,7 @@ class InputWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: TextFormField(
+            keyboardType: getKeyboardType(keyboardType),
             obscureText: this.obscureText,
             decoration: InputDecoration(
               prefixIcon: this.prefixIcon == null
@@ -58,5 +61,18 @@ class InputWidget extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+TextInputType getKeyboardType(keyboardType) {
+  switch (keyboardType) {
+    case "phone":
+      return TextInputType.phone;
+    case "email":
+      return TextInputType.emailAddress;
+    case "number":
+      return TextInputType.number;
+    default:
+      return TextInputType.text;
   }
 }
