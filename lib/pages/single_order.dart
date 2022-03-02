@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:laundry_app/models/order_details.dart';
 import 'package:laundry_app/utils/constants.dart';
+import 'package:laundry_app/models/order.dart';
+
+import 'package:laundry_app/services/orderService.dart';
 
 class SingleOrder extends StatefulWidget {
   @override
@@ -9,6 +13,21 @@ class SingleOrder extends StatefulWidget {
 }
 
 class _SingleOrderState extends State<SingleOrder> {
+  Order _order;
+  bool _loading;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = true;
+    OrderService.getOrder().then((result) {
+      setState(() {
+        _order = result;
+        _loading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,18 +72,16 @@ class _SingleOrderState extends State<SingleOrder> {
                         children: [
                           TextSpan(
                             text: "Details About\n",
-                            style:
-                                Theme.of(context).textTheme.headline6.copyWith(
-                                      color: Colors.white,
-                                    ),
+                            style: Theme.of(context).textTheme.headline6.copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                           TextSpan(
-                            text: "Order #521",
-                            style:
-                                Theme.of(context).textTheme.headline6.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            text: "Order #" + (_loading ? " " : _order.id.toString()),
+                            style: Theme.of(context).textTheme.headline6.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                         ],
                       ),
@@ -88,12 +105,11 @@ class _SingleOrderState extends State<SingleOrder> {
                         children: [
                           Text(
                             "Order Details",
-                            style:
-                                Theme.of(context).textTheme.headline6.copyWith(
-                                      color: Color.fromRGBO(74, 77, 84, 1),
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w800,
-                                    ),
+                            style: Theme.of(context).textTheme.headline6.copyWith(
+                                  color: Color.fromRGBO(74, 77, 84, 1),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w800,
+                                ),
                           ),
                           SizedBox(
                             height: 6.0,
@@ -108,24 +124,11 @@ class _SingleOrderState extends State<SingleOrder> {
                           SizedBox(
                             height: 10.0,
                           ),
-                          getItemRow("3", "T-shirts (man)", "\$30.00"),
-                          getItemRow("2", "T-shirts (man)", "\$40.00"),
-                          getItemRow("4", "Pants (man)", "\$80.00"),
-                          getItemRow("1", "Jeans (man)", "\$20.00"),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          Text(
-                            "IRONING",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromRGBO(143, 148, 162, 1),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          getItemRow("3", "T-shirt (woman)", "\$30.00"),
+                          if (_loading)
+                            Text("Cargando información...")
+                          else
+                            for (var detail in _order.details)
+                              getItemRow(detail.quantity.toString(), detail.description, detail.total.toString()),
                           Divider(),
                           getSubtotalRow("Subtotal", "\$200.00"),
                           getSubtotalRow("Delivery", "\$225.00"),
@@ -149,12 +152,11 @@ class _SingleOrderState extends State<SingleOrder> {
                         children: [
                           Text(
                             "Your clothes are now washing.",
-                            style:
-                                Theme.of(context).textTheme.headline6.copyWith(
-                                      color: Color.fromRGBO(74, 77, 84, 1),
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w800,
-                                    ),
+                            style: Theme.of(context).textTheme.headline6.copyWith(
+                                  color: Color.fromRGBO(74, 77, 84, 1),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w800,
+                                ),
                           ),
                           SizedBox(
                             height: 5.0,
@@ -197,6 +199,17 @@ class _SingleOrderState extends State<SingleOrder> {
         ),
       ),
     );
+  }
+}
+
+Widget displayOrderDetails(List<OrderDetail> details) {
+  if (details == null) {
+    return Text("No hay datos cargados.");
+  } else {
+    return new Row(
+        children: details.map((detail) {
+      return getItemRow(detail.quantity.toString(), detail.description, detail.total.toString());
+    }).toList());
   }
 }
 
@@ -276,7 +289,7 @@ Widget getItemRow(String count, String item, String price) {
           ),
         ),
         Text(
-          price,
+          "\$$price",
           style: TextStyle(
             color: Color.fromRGBO(74, 77, 84, 1),
             fontSize: 15.0,

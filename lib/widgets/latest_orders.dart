@@ -1,25 +1,32 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:laundry_app/models/order.dart';
+import 'package:laundry_app/models/order_details.dart';
 import 'package:laundry_app/utils/constants.dart';
 import 'package:laundry_app/widgets/order_card.dart';
 
 class LatestOrders extends StatelessWidget {
   final List<Order> orders = [
     Order(
-      id: 507,
-      deliveryAddress: "New Times Square",
-      arrivalDate: DateTime(2020, 1, 23),
-      placedDate: DateTime(2020, 1, 17),
-      status: OrderStatus.DELIVERING,
-    ),
+        id: 507,
+        deliveryAddress: "New Times Square",
+        arrivalDate: DateTime(2020, 1, 23),
+        placedDate: DateTime(2020, 1, 17),
+        status: OrderStatus.DELIVERING,
+        details: [
+          OrderDetail(
+              id: 1, quantity: 2, description: "Descripcion", total: 30.0)
+        ]),
     Order(
-      id: 536,
-      deliveryAddress: "Victoria Square",
-      arrivalDate: DateTime(2020, 1, 21),
-      placedDate: DateTime(2020, 1, 19),
-      status: OrderStatus.PICKING_UP,
-    )
+        id: 536,
+        deliveryAddress: "Victoria Square",
+        arrivalDate: DateTime(2020, 1, 21),
+        placedDate: DateTime(2020, 1, 19),
+        status: OrderStatus.PICKING_UP,
+        details: [])
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
