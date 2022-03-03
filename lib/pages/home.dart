@@ -71,7 +71,6 @@ class Home extends StatelessWidget {
                     SizedBox(
                       height: 40.0,
                     ),
-                    // Let's create a generic button widget
                     AppButton(
                       text: "Sign in",
                       type: ButtonType.PLAIN,

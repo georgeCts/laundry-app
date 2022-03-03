@@ -1,8 +1,11 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:laundry_app/utils/constants.dart';
+import 'package:laundry_app/utils/helper.dart';
+
 import 'package:laundry_app/widgets/latest_orders.dart';
 import 'package:laundry_app/widgets/location_slider.dart';
 
@@ -51,6 +54,10 @@ class _DashboardState extends State<Dashboard> {
           setState(() {
             activeIndex = index;
           });
+
+          if (index == 2) {
+            nextScreen(context, "/new-service");
+          }
         },
       ),
       backgroundColor: Constants.primaryColor,
@@ -84,15 +91,6 @@ class _DashboardState extends State<Dashboard> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            FlutterIcons.keyboard_backspace_mdi,
-                            color: Colors.white,
-                          ),
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -101,19 +99,13 @@ class _DashboardState extends State<Dashboard> {
                                 children: [
                                   TextSpan(
                                     text: "Welcome Back,\n",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        .copyWith(
+                                    style: Theme.of(context).textTheme.headline6.copyWith(
                                           color: Colors.white,
                                         ),
                                   ),
                                   TextSpan(
                                     text: "FlutterPanda!",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
-                                        .copyWith(
+                                    style: Theme.of(context).textTheme.headline6.copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
                                         ),

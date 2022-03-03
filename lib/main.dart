@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry_app/pages/dashboard.dart';
 import 'package:laundry_app/pages/home.dart';
 import 'package:laundry_app/pages/login.dart';
+import 'package:laundry_app/pages/new_service.dart';
 import 'package:laundry_app/pages/register.dart';
 import 'package:laundry_app/pages/single_order.dart';
 import 'package:laundry_app/utils/constants.dart';
@@ -49,6 +50,10 @@ Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     case "/dashboard":
       return MaterialPageRoute(builder: (BuildContext context) {
         return Dashboard();
+      });
+    case "/new-service":
+      return MaterialPageRoute(builder: (BuildContext context) {
+        return NewService();
       });
     case "/single-order":
       return MaterialPageRoute(builder: (BuildContext context) {
