@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 import 'package:laundry_app/utils/constants.dart';
 import 'package:laundry_app/utils/helper.dart';
@@ -32,7 +33,7 @@ class _HomeState extends State<Home> {
       case 1:
         return _catalogServices;
         break;
-      case 3:
+      case 4:
         return _config;
         break;
     }
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
             color: activeIndex == 0 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.map_marker_radius_mco,
+            FlutterIcons.format_list_checkbox_mco,
             size: 30.0,
             color: activeIndex == 1 ? Colors.white : Color(0xFFC8C9CB),
           ),
@@ -419,11 +420,37 @@ Widget getItemRow(String item, String price) {
 
 class Configuration extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        "Configuration Page",
-        textScaleFactor: 2.0,
-      ),
+    return SettingsList(
+      contentPadding: EdgeInsets.only(top: kToolbarHeight),
+      sections: [
+        SettingsSection(
+          title: Text('Common'),
+          tiles: <SettingsTile>[
+            SettingsTile.navigation(
+              leading: Icon(Icons.language),
+              title: Text('Language'),
+              value: Text('English'),
+            )
+          ],
+        ),
+        SettingsSection(
+          title: Text('Account'),
+          tiles: <SettingsTile>[
+            SettingsTile.navigation(
+              leading: Icon(Icons.phone),
+              title: Text('Phone number'),
+            ),
+            SettingsTile.navigation(
+              leading: Icon(Icons.email),
+              title: Text('Email'),
+            ),
+            SettingsTile.navigation(
+              leading: Icon(Icons.logout),
+              title: Text('Sign out'),
+            )
+          ],
+        )
+      ],
     );
   }
 }
